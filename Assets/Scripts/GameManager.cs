@@ -49,6 +49,11 @@ public class GameManager : MonoBehaviour
             uiManager.Initialize(this, upgradeSystem);
         }
 
+        if (upgradeSystem == null)
+        {
+            Debug.LogError("upgradeSystem не створений. Створюємо новий.");
+            upgradeSystem = new UpgradeSystem();
+        }
         upgradeSystem.Initialize(playerData, () => OnPlayerDataUpdated?.Invoke(playerData));
         InvokeRepeating(nameof(AddPassiveIncome), PassiveIncomeInterval, PassiveIncomeInterval);
     }
